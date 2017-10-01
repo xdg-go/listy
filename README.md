@@ -1,3 +1,6 @@
+[![GoDoc](https://godoc.org/github.com/xdg/listy?status.svg)](https://godoc.org/github.com/xdg/listy)
+[![Build Status](https://travis-ci.org/xdg/listy.svg?branch=master)](https://travis-ci.org/xdg/listy)
+
 # Listy – Functional programming with Golang slices
 
 ## Synopsis
