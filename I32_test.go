@@ -29,13 +29,31 @@ func TestListI32Box(t *testing.T) {
 
 	var data struct {
 		Box struct {
-			Input []int32
-			Unbox []int32
+			Input  []int32
+			Head   int32
+			Tail   []int32
+			Init   []int32
+			Last   int32
+			Len    int
+			Less23 bool
+			Less32 bool
+			Swap   []int32
+			Unbox  []int32
 		}
 	}
 	getI32TestData(is, &data)
 
-	is.Equal(listy.I32(data.Box.Input).Unbox(), data.Box.Unbox)
+	xs := listy.I32(data.Box.Input)
+
+	is.Equal(xs.Unbox(), data.Box.Unbox)
+	is.Equal(xs.Head(), data.Box.Head)
+	is.Equal(xs.Tail().Unbox(), data.Box.Tail)
+	is.Equal(xs.Init().Unbox(), data.Box.Init)
+	is.Equal(xs.Last(), data.Box.Last)
+	is.Equal(xs.Len(), data.Box.Len)
+	is.Equal(xs.Less(2, 3), data.Box.Less23)
+	is.Equal(xs.Less(3, 2), data.Box.Less32)
+	is.Equal(xs.Swap(0, 1).Unbox(), data.Box.Swap)
 }
 
 func TestListI32Contains(t *testing.T) {

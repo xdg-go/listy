@@ -29,13 +29,31 @@ func TestListSBox(t *testing.T) {
 
 	var data struct {
 		Box struct {
-			Input []string
-			Unbox []string
+			Input  []string
+			Head   string
+			Tail   []string
+			Init   []string
+			Last   string
+			Len    int
+			Less23 bool
+			Less32 bool
+			Swap   []string
+			Unbox  []string
 		}
 	}
 	getSTestData(is, &data)
 
-	is.Equal(listy.S(data.Box.Input).Unbox(), data.Box.Unbox)
+	xs := listy.S(data.Box.Input)
+
+	is.Equal(xs.Unbox(), data.Box.Unbox)
+	is.Equal(xs.Head(), data.Box.Head)
+	is.Equal(xs.Tail().Unbox(), data.Box.Tail)
+	is.Equal(xs.Init().Unbox(), data.Box.Init)
+	is.Equal(xs.Last(), data.Box.Last)
+	is.Equal(xs.Len(), data.Box.Len)
+	is.Equal(xs.Less(2, 3), data.Box.Less23)
+	is.Equal(xs.Less(3, 2), data.Box.Less32)
+	is.Equal(xs.Swap(0, 1).Unbox(), data.Box.Swap)
 }
 
 func TestListSContains(t *testing.T) {

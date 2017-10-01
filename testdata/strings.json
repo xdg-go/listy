@@ -1,6 +1,14 @@
 {
     "box" : {
+        "head"  : "a",
+        "init"  : [ "a", "b", "c", "d" ],
         "input" : [ "a", "b", "c", "d", "e" ],
+        "last"  : "e",
+        "len"   : 5,
+        "less23": true,
+        "less32": false,
+        "swap"  : [ "b", "a", "c", "d", "e" ],
+        "tail"  : [ "b", "c", "d", "e" ],
         "unbox" : [ "a", "b", "c", "d", "e" ]
     },
     "contains" : {

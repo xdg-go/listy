@@ -32,12 +32,55 @@ func (xs U) Filter(f func(uint) bool) U {
 	return ys
 }
 
+// Head returns the first value in the list.  Panics if the list is empty.
+func (xs U) Head() uint {
+	return xs[0]
+}
+
+// Init returns a new list with all values except the last.  Panics if the
+// list is empty.
+func (xs U) Init() U {
+	ys := make(U, len(xs)-1)
+	copy(ys, xs[:len(xs)-1])
+	return ys
+}
+
+// List returns the last value in the list.  Panics if the list is empty.
+func (xs U) Last() uint {
+	return xs[len(xs)-1]
+}
+
+// Len returns the length of the list.
+func (xs U) Len() int {
+	return len(xs)
+}
+
+// Less reports whether the element with index i should sort before the
+// element with index j.
+func (xs U) Less(i, j int) bool {
+	return xs[i] < xs[j]
+}
+
 // Map returns a new list with every element transformed by a function
 func (xs U) Map(f func(uint) uint) U {
 	ys := make(U, 0, len(xs))
 	for _, x := range xs {
 		ys = append(ys, f(x))
 	}
+	return ys
+}
+
+// Swap swaps the elements with indexes i and j and returns the original list.
+func (xs U) Swap(i, j int) U {
+	xs[i], xs[j] = xs[j], xs[i]
+	return xs
+}
+
+// Tail returns a new list with all values except the head.  Panics if the
+// list is empty.
+func (xs U) Tail() U {
+	ys := make(U, len(xs)-1)
+	copy(ys, xs[1:len(xs)])
 	return ys
 }
 

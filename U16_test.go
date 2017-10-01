@@ -29,13 +29,31 @@ func TestListU16Box(t *testing.T) {
 
 	var data struct {
 		Box struct {
-			Input []uint16
-			Unbox []uint16
+			Input  []uint16
+			Head   uint16
+			Tail   []uint16
+			Init   []uint16
+			Last   uint16
+			Len    int
+			Less23 bool
+			Less32 bool
+			Swap   []uint16
+			Unbox  []uint16
 		}
 	}
 	getU16TestData(is, &data)
 
-	is.Equal(listy.U16(data.Box.Input).Unbox(), data.Box.Unbox)
+	xs := listy.U16(data.Box.Input)
+
+	is.Equal(xs.Unbox(), data.Box.Unbox)
+	is.Equal(xs.Head(), data.Box.Head)
+	is.Equal(xs.Tail().Unbox(), data.Box.Tail)
+	is.Equal(xs.Init().Unbox(), data.Box.Init)
+	is.Equal(xs.Last(), data.Box.Last)
+	is.Equal(xs.Len(), data.Box.Len)
+	is.Equal(xs.Less(2, 3), data.Box.Less23)
+	is.Equal(xs.Less(3, 2), data.Box.Less32)
+	is.Equal(xs.Swap(0, 1).Unbox(), data.Box.Swap)
 }
 
 func TestListU16Contains(t *testing.T) {
