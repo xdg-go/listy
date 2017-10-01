@@ -15,14 +15,14 @@ import (
 )
 
 var testdata map[string][]byte
-var testfiles = []string{"ints"}
+var testfiles = []string{"ints.json", "strings.json"}
 
 func TestMain(m *testing.M) {
 	testdata = make(map[string][]byte)
 	for _, s := range testfiles {
-		b, err := ioutil.ReadFile(fmt.Sprintf("testdata/%s.json", s))
+		b, err := ioutil.ReadFile(fmt.Sprintf("testdata/%s", s))
 		if err != nil {
-			log.Fatalf("Error reading %s.json: %s", s, err)
+			log.Fatalf("Error reading %s: %s", s, err)
 		}
 		testdata[s] = b
 	}

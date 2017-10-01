@@ -15,7 +15,7 @@ import (
 )
 
 func getI8TestData(is *testy.T, v interface{}) {
-	err := json.Unmarshal(testdata["ints"], v)
+	err := json.Unmarshal(testdata["ints.json"], v)
 	if err != nil {
 		is.Fatalf("Error unmarshaling ints.json: %s", err)
 	}
