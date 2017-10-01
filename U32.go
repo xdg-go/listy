@@ -70,10 +70,9 @@ func (xs U32) Map(f func(uint32) uint32) U32 {
 	return ys
 }
 
-// Swap swaps the elements with indexes i and j and returns the original list.
-func (xs U32) Swap(i, j int) U32 {
+// Swap does an in-place swap of the elements with indexes i and j.
+func (xs U32) Swap(i, j int) {
 	xs[i], xs[j] = xs[j], xs[i]
-	return xs
 }
 
 // Tail returns a new list with all values except the head.  Panics if the

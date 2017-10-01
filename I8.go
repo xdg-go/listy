@@ -68,10 +68,10 @@ func (xs I8) Map(f func(int8) int8) I8 {
 	return ys
 }
 
-// Swap swaps the elements with indexes i and j and returns the original list.
-func (xs I8) Swap(i, j int) I8 {
+// Swap does an in-place swap of the elements with indexes i and j.  Panics if
+// the elements don't exist.
+func (xs I8) Swap(i, j int) {
 	xs[i], xs[j] = xs[j], xs[i]
-	return xs
 }
 
 // Tail returns a new list with all values except the head.  Panics if the

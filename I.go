@@ -70,10 +70,9 @@ func (xs I) Map(f func(int) int) I {
 	return ys
 }
 
-// Swap swaps the elements with indexes i and j and returns the original list.
-func (xs I) Swap(i, j int) I {
+// Swap does an in-place swap of the elements with indexes i and j.
+func (xs I) Swap(i, j int) {
 	xs[i], xs[j] = xs[j], xs[i]
-	return xs
 }
 
 // Tail returns a new list with all values except the head.  Panics if the

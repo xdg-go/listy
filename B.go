@@ -70,10 +70,9 @@ func (xs B) Map(f func(byte) byte) B {
 	return ys
 }
 
-// Swap swaps the elements with indexes i and j and returns the original list.
-func (xs B) Swap(i, j int) B {
+// Swap does an in-place swap of the elements with indexes i and j.
+func (xs B) Swap(i, j int) {
 	xs[i], xs[j] = xs[j], xs[i]
-	return xs
 }
 
 // Tail returns a new list with all values except the head.  Panics if the

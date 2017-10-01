@@ -53,7 +53,10 @@ func TestListI32Box(t *testing.T) {
 	is.Equal(xs.Len(), data.Box.Len)
 	is.Equal(xs.Less(2, 3), data.Box.Less23)
 	is.Equal(xs.Less(3, 2), data.Box.Less32)
-	is.Equal(xs.Swap(0, 1).Unbox(), data.Box.Swap)
+
+	// For Sort.Interface, Swap returns nothing
+	xs.Swap(0, 1)
+	is.Equal(xs.Unbox(), data.Box.Swap)
 }
 
 func TestListI32Contains(t *testing.T) {
