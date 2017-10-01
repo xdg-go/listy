@@ -1,0 +1,21 @@
+{
+    "box" : {
+        "input" : [ "a", "b", "c", "d", "e" ],
+        "unbox" : [ "a", "b", "c", "d", "e" ]
+    },
+    "contains" : {
+        "input" : [ "a", "b", "c", "d", "e" ],
+        "containsTrue" : [ "b", "e" ],
+        "containsFalse" : [ "x", "z" ]
+    },
+    "filter" : {
+        "input" : [ "c", "a", "d", "a", "e" ],
+        "lessthan" : "b",
+        "filtered" : [ "a", "a" ]
+    },
+    "map" : {
+        "input" : [ "c", "a", "d", "a", "e" ],
+        "add" : "z",
+        "mapped" : [ "cz", "az", "dz", "az", "ez" ]
+    }
+}
