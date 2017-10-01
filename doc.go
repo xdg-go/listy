@@ -6,3 +6,5 @@
 
 // Package listy provides functional programming idioms for Go slices.
 package listy
+
+//go:generate go run generator.go

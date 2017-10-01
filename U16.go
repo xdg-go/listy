@@ -1,3 +1,5 @@
+// DO NOT EDIT!  This file was generated via `go generate`
+
 // Copyright 2017 by David A. Golden. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License"); you may
@@ -6,11 +8,11 @@
 
 package listy
 
-// I8 wraps a slice of int8
-type I8 []int8
+// U16 wraps a slice of uint16
+type U16 []uint16
 
 // Contains checks if a value is in the list
-func (xs I8) Contains(v int8) bool {
+func (xs U16) Contains(v uint16) bool {
 	for _, x := range xs {
 		if x == v {
 			return true
@@ -20,8 +22,8 @@ func (xs I8) Contains(v int8) bool {
 }
 
 // Filter returns a new list of elements matching a predicate
-func (xs I8) Filter(f func(int8) bool) I8 {
-	ys := make(I8, 0, len(xs))
+func (xs U16) Filter(f func(uint16) bool) U16 {
+	ys := make(U16, 0, len(xs))
 	for _, x := range xs {
 		if f(x) {
 			ys = append(ys, x)
@@ -31,8 +33,8 @@ func (xs I8) Filter(f func(int8) bool) I8 {
 }
 
 // Map returns a new list with every element transformed by a function
-func (xs I8) Map(f func(int8) int8) I8 {
-	ys := make(I8, 0, len(xs))
+func (xs U16) Map(f func(uint16) uint16) U16 {
+	ys := make(U16, 0, len(xs))
 	for _, x := range xs {
 		ys = append(ys, f(x))
 	}
@@ -40,6 +42,6 @@ func (xs I8) Map(f func(int8) int8) I8 {
 }
 
 // Unbox returns the list as a native slice
-func (xs I8) Unbox() []int8 {
-	return []int8(xs)
+func (xs U16) Unbox() []uint16 {
+	return []uint16(xs)
 }

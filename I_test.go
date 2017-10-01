@@ -1,3 +1,5 @@
+// DO NOT EDIT!  This file was generated via `go generate`
+
 // Copyright 2017 by David A. Golden. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License"); you may
@@ -14,42 +16,42 @@ import (
 	"github.com/xdg/testy"
 )
 
-func getI8TestData(is *testy.T, v interface{}) {
+func getITestData(is *testy.T, v interface{}) {
 	err := json.Unmarshal(testdata["ints"], v)
 	if err != nil {
 		is.Fatalf("Error unmarshaling ints.json: %s", err)
 	}
 }
 
-func TestListI8Box(t *testing.T) {
+func TestListIBox(t *testing.T) {
 	is := testy.New(t)
 	defer func() { t.Logf(is.Done()) }()
 
 	var data struct {
 		Box struct {
-			Input []int8
-			Unbox []int8
+			Input []int
+			Unbox []int
 		}
 	}
-	getI8TestData(is, &data)
+	getITestData(is, &data)
 
-	is.Equal(listy.I8(data.Box.Input).Unbox(), data.Box.Unbox)
+	is.Equal(listy.I(data.Box.Input).Unbox(), data.Box.Unbox)
 }
 
-func TestListI8Contains(t *testing.T) {
+func TestListIContains(t *testing.T) {
 	is := testy.New(t)
 	defer func() { t.Logf(is.Done()) }()
 
 	var data struct {
 		Contains struct {
-			Input         []int8
-			ContainsTrue  []int8
-			ContainsFalse []int8
+			Input         []int
+			ContainsTrue  []int
+			ContainsFalse []int
 		}
 	}
-	getI8TestData(is, &data)
+	getITestData(is, &data)
 
-	xs := listy.I8(data.Contains.Input)
+	xs := listy.I(data.Contains.Input)
 
 	for _, x := range data.Contains.ContainsTrue {
 		is.True(xs.Contains(x))
@@ -59,41 +61,41 @@ func TestListI8Contains(t *testing.T) {
 	}
 }
 
-func TestListI8Filter(t *testing.T) {
+func TestListIFilter(t *testing.T) {
 	is := testy.New(t)
 	defer func() { t.Logf(is.Done()) }()
 
 	var data struct {
 		Filter struct {
-			Input    []int8
-			Lessthan int8
-			Filtered []int8
+			Input    []int
+			Lessthan int
+			Filtered []int
 		}
 	}
-	getI8TestData(is, &data)
+	getITestData(is, &data)
 
-	xs := listy.I8(data.Filter.Input)
+	xs := listy.I(data.Filter.Input)
 
-	ys := xs.Filter(func(v int8) bool { return v < data.Filter.Lessthan })
+	ys := xs.Filter(func(v int) bool { return v < data.Filter.Lessthan })
 
 	is.Equal(ys.Unbox(), data.Filter.Filtered)
 }
 
-func TestListI8Map(t *testing.T) {
+func TestListIMap(t *testing.T) {
 	is := testy.New(t)
 	defer func() { t.Logf(is.Done()) }()
 
 	var data struct {
 		Map struct {
-			Input  []int8
-			Add    int8
-			Mapped []int8
+			Input  []int
+			Add    int
+			Mapped []int
 		}
 	}
-	getI8TestData(is, &data)
+	getITestData(is, &data)
 
-	xs := listy.I8(data.Map.Input)
-	ys := xs.Map(func(v int8) int8 { return v + data.Map.Add })
+	xs := listy.I(data.Map.Input)
+	ys := xs.Map(func(v int) int { return v + data.Map.Add })
 
 	is.Equal(ys.Unbox(), data.Map.Mapped)
 }
