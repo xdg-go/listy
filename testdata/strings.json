@@ -1,5 +1,6 @@
 {
     "box" : {
+        "elem3" : "d",
         "head"  : "a",
         "init"  : [ "a", "b", "c", "d" ],
         "input" : [ "a", "b", "c", "d", "e" ],

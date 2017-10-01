@@ -11,6 +11,12 @@ package listy
 // B wraps a slice of byte
 type B []byte
 
+// Elem returns the element with the given index in the list.  Panics if the
+// element does not exist.
+func (xs B) Elem(n int) byte {
+	return xs[n]
+}
+
 // Contains checks if a value is in the list
 func (xs B) Contains(v byte) bool {
 	for _, x := range xs {
@@ -70,7 +76,8 @@ func (xs B) Map(f func(byte) byte) B {
 	return ys
 }
 
-// Swap does an in-place swap of the elements with indexes i and j.
+// Swap does an in-place swap of the elements with indexes i and j.  Panics if
+// the elements don't exist.
 func (xs B) Swap(i, j int) {
 	xs[i], xs[j] = xs[j], xs[i]
 }

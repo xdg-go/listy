@@ -11,6 +11,12 @@ package listy
 // R wraps a slice of rune
 type R []rune
 
+// Elem returns the element with the given index in the list.  Panics if the
+// element does not exist.
+func (xs R) Elem(n int) rune {
+	return xs[n]
+}
+
 // Contains checks if a value is in the list
 func (xs R) Contains(v rune) bool {
 	for _, x := range xs {
@@ -70,7 +76,8 @@ func (xs R) Map(f func(rune) rune) R {
 	return ys
 }
 
-// Swap does an in-place swap of the elements with indexes i and j.
+// Swap does an in-place swap of the elements with indexes i and j.  Panics if
+// the elements don't exist.
 func (xs R) Swap(i, j int) {
 	xs[i], xs[j] = xs[j], xs[i]
 }

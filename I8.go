@@ -9,6 +9,12 @@ package listy
 // I8 wraps a slice of int8
 type I8 []int8
 
+// Elem returns the element with the given index in the list.  Panics if the
+// element does not exist.
+func (xs I8) Elem(n int) int8 {
+	return xs[n]
+}
+
 // Contains checks if a value is in the list
 func (xs I8) Contains(v int8) bool {
 	for _, x := range xs {

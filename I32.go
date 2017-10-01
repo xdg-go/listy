@@ -11,6 +11,12 @@ package listy
 // I32 wraps a slice of int32
 type I32 []int32
 
+// Elem returns the element with the given index in the list.  Panics if the
+// element does not exist.
+func (xs I32) Elem(n int) int32 {
+	return xs[n]
+}
+
 // Contains checks if a value is in the list
 func (xs I32) Contains(v int32) bool {
 	for _, x := range xs {
@@ -70,7 +76,8 @@ func (xs I32) Map(f func(int32) int32) I32 {
 	return ys
 }
 
-// Swap does an in-place swap of the elements with indexes i and j.
+// Swap does an in-place swap of the elements with indexes i and j.  Panics if
+// the elements don't exist.
 func (xs I32) Swap(i, j int) {
 	xs[i], xs[j] = xs[j], xs[i]
 }

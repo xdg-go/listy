@@ -31,6 +31,7 @@ func TestListU64Box(t *testing.T) {
 		Box struct {
 			Input  []uint64
 			Head   uint64
+			Elem3  uint64
 			Tail   []uint64
 			Init   []uint64
 			Last   uint64
@@ -47,6 +48,7 @@ func TestListU64Box(t *testing.T) {
 
 	is.Equal(xs.Unbox(), data.Box.Unbox)
 	is.Equal(xs.Head(), data.Box.Head)
+	is.Equal(xs.Elem(3), data.Box.Elem3)
 	is.Equal(xs.Tail().Unbox(), data.Box.Tail)
 	is.Equal(xs.Init().Unbox(), data.Box.Init)
 	is.Equal(xs.Last(), data.Box.Last)

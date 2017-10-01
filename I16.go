@@ -11,6 +11,12 @@ package listy
 // I16 wraps a slice of int16
 type I16 []int16
 
+// Elem returns the element with the given index in the list.  Panics if the
+// element does not exist.
+func (xs I16) Elem(n int) int16 {
+	return xs[n]
+}
+
 // Contains checks if a value is in the list
 func (xs I16) Contains(v int16) bool {
 	for _, x := range xs {
@@ -70,7 +76,8 @@ func (xs I16) Map(f func(int16) int16) I16 {
 	return ys
 }
 
-// Swap does an in-place swap of the elements with indexes i and j.
+// Swap does an in-place swap of the elements with indexes i and j.  Panics if
+// the elements don't exist.
 func (xs I16) Swap(i, j int) {
 	xs[i], xs[j] = xs[j], xs[i]
 }

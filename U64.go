@@ -11,6 +11,12 @@ package listy
 // U64 wraps a slice of uint64
 type U64 []uint64
 
+// Elem returns the element with the given index in the list.  Panics if the
+// element does not exist.
+func (xs U64) Elem(n int) uint64 {
+	return xs[n]
+}
+
 // Contains checks if a value is in the list
 func (xs U64) Contains(v uint64) bool {
 	for _, x := range xs {
@@ -70,7 +76,8 @@ func (xs U64) Map(f func(uint64) uint64) U64 {
 	return ys
 }
 
-// Swap does an in-place swap of the elements with indexes i and j.
+// Swap does an in-place swap of the elements with indexes i and j.  Panics if
+// the elements don't exist.
 func (xs U64) Swap(i, j int) {
 	xs[i], xs[j] = xs[j], xs[i]
 }

@@ -31,6 +31,7 @@ func TestListI16Box(t *testing.T) {
 		Box struct {
 			Input  []int16
 			Head   int16
+			Elem3  int16
 			Tail   []int16
 			Init   []int16
 			Last   int16
@@ -47,6 +48,7 @@ func TestListI16Box(t *testing.T) {
 
 	is.Equal(xs.Unbox(), data.Box.Unbox)
 	is.Equal(xs.Head(), data.Box.Head)
+	is.Equal(xs.Elem(3), data.Box.Elem3)
 	is.Equal(xs.Tail().Unbox(), data.Box.Tail)
 	is.Equal(xs.Init().Unbox(), data.Box.Init)
 	is.Equal(xs.Last(), data.Box.Last)

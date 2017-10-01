@@ -11,6 +11,12 @@ package listy
 // U wraps a slice of uint
 type U []uint
 
+// Elem returns the element with the given index in the list.  Panics if the
+// element does not exist.
+func (xs U) Elem(n int) uint {
+	return xs[n]
+}
+
 // Contains checks if a value is in the list
 func (xs U) Contains(v uint) bool {
 	for _, x := range xs {
@@ -70,7 +76,8 @@ func (xs U) Map(f func(uint) uint) U {
 	return ys
 }
 
-// Swap does an in-place swap of the elements with indexes i and j.
+// Swap does an in-place swap of the elements with indexes i and j.  Panics if
+// the elements don't exist.
 func (xs U) Swap(i, j int) {
 	xs[i], xs[j] = xs[j], xs[i]
 }
