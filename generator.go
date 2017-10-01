@@ -38,6 +38,8 @@ var newTypes = []generated{
 	{TypeName: "I32", BaseType: "int32", TestFile: "ints.json"},
 	{TypeName: "I64", BaseType: "int64", TestFile: "ints.json"},
 	{TypeName: "S", BaseType: "string", TestFile: "strings.json"},
+	{TypeName: "B", BaseType: "byte", TestFile: "ints.json"},
+	{TypeName: "R", BaseType: "rune", TestFile: "ints.json"},
 }
 
 func (g generated) replaceTypes(orig []byte) (new []byte) {
