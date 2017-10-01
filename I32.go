@@ -51,7 +51,7 @@ func (xs I32) Init() I32 {
 	return ys
 }
 
-// List returns the last value in the list.  Panics if the list is empty.
+// Last returns the last value in the list.  Panics if the list is empty.
 func (xs I32) Last() int32 {
 	return xs[len(xs)-1]
 }

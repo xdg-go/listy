@@ -51,7 +51,7 @@ func (xs B) Init() B {
 	return ys
 }
 
-// List returns the last value in the list.  Panics if the list is empty.
+// Last returns the last value in the list.  Panics if the list is empty.
 func (xs B) Last() byte {
 	return xs[len(xs)-1]
 }

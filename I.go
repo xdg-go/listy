@@ -51,7 +51,7 @@ func (xs I) Init() I {
 	return ys
 }
 
-// List returns the last value in the list.  Panics if the list is empty.
+// Last returns the last value in the list.  Panics if the list is empty.
 func (xs I) Last() int {
 	return xs[len(xs)-1]
 }

@@ -51,7 +51,7 @@ func (xs U64) Init() U64 {
 	return ys
 }
 
-// List returns the last value in the list.  Panics if the list is empty.
+// Last returns the last value in the list.  Panics if the list is empty.
 func (xs U64) Last() uint64 {
 	return xs[len(xs)-1]
 }

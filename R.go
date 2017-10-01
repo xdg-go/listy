@@ -51,7 +51,7 @@ func (xs R) Init() R {
 	return ys
 }
 
-// List returns the last value in the list.  Panics if the list is empty.
+// Last returns the last value in the list.  Panics if the list is empty.
 func (xs R) Last() rune {
 	return xs[len(xs)-1]
 }

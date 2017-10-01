@@ -51,7 +51,7 @@ func (xs U32) Init() U32 {
 	return ys
 }
 
-// List returns the last value in the list.  Panics if the list is empty.
+// Last returns the last value in the list.  Panics if the list is empty.
 func (xs U32) Last() uint32 {
 	return xs[len(xs)-1]
 }
