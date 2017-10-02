@@ -1,5 +1,6 @@
 {
     "box" : {
+        "concat": [ "a", "b", "c", "d", "e", "a", "b", "c", "d", "e" ],
         "elem3" : "d",
         "head"  : "a",
         "init"  : [ "a", "b", "c", "d" ],
@@ -8,6 +9,7 @@
         "len"   : 5,
         "less23": true,
         "less32": false,
+        "reverse": [ "e", "d", "c", "b", "a" ],
         "swap"  : [ "b", "a", "c", "d", "e" ],
         "tail"  : [ "b", "c", "d", "e" ],
         "unbox" : [ "a", "b", "c", "d", "e" ]

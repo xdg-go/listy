@@ -29,34 +29,45 @@ func TestListU64Box(t *testing.T) {
 
 	var data struct {
 		Box struct {
-			Input  []uint64
-			Head   uint64
-			Elem3  uint64
-			Tail   []uint64
-			Init   []uint64
-			Last   uint64
-			Len    int
-			Less23 bool
-			Less32 bool
-			Swap   []uint64
-			Unbox  []uint64
+			Concat  []uint64
+			Elem3   uint64
+			Head    uint64
+			Init    []uint64
+			Input   []uint64
+			Last    uint64
+			Len     int
+			Less23  bool
+			Less32  bool
+			Reverse []uint64
+			Swap    []uint64
+			Tail    []uint64
+			Unbox   []uint64
 		}
 	}
 	getU64TestData(is, &data)
 
 	xs := listy.U64(data.Box.Input)
 
-	is.Equal(xs.Unbox(), data.Box.Unbox)
-	is.Equal(xs.Head(), data.Box.Head)
-	is.Equal(xs.Elem(3), data.Box.Elem3)
-	is.Equal(xs.Tail().Unbox(), data.Box.Tail)
-	is.Equal(xs.Init().Unbox(), data.Box.Init)
-	is.Equal(xs.Last(), data.Box.Last)
+	// Tests that return ints, bools, etc. irrespective of value type
 	is.Equal(xs.Len(), data.Box.Len)
 	is.Equal(xs.Less(2, 3), data.Box.Less23)
 	is.Equal(xs.Less(3, 2), data.Box.Less32)
 
-	// For Sort.Interface, Swap returns nothing
+	// Tests that return the value type
+	is.Equal(xs.Head(), data.Box.Head)
+	is.Equal(xs.Elem(3), data.Box.Elem3)
+	is.Equal(xs.Last(), data.Box.Last)
+
+	// Tests that return a slice of the value type
+	is.Equal(xs.Unbox(), data.Box.Unbox)
+	is.Equal(xs.Tail().Unbox(), data.Box.Tail)
+	is.Equal(xs.Init().Unbox(), data.Box.Init)
+	is.Equal(xs.Concat(data.Box.Input).Unbox(), data.Box.Concat)
+	is.Equal(xs.ConcatU64(listy.U64(data.Box.Input)).Unbox(), data.Box.Concat)
+	is.Equal(xs.Reverse().Unbox(), data.Box.Reverse)
+
+	// For Sort.Interface, Swap is in place and returns nothing
+	xs = listy.U64(data.Box.Input)
 	xs.Swap(0, 1)
 	is.Equal(xs.Unbox(), data.Box.Swap)
 }

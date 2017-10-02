@@ -11,10 +11,19 @@ package listy
 // U32 wraps a slice of uint32
 type U32 []uint32
 
-// Elem returns the element with the given index in the list.  Panics if the
-// element does not exist.
-func (xs U32) Elem(n int) uint32 {
-	return xs[n]
+// Concat returns a copy of the original slice with the additional slice of
+// values appended.
+func (xs U32) Concat(ys []uint32) U32 {
+	zs := make(U32, len(xs)+len(ys))
+	copy(zs, xs)
+	copy(zs[len(xs):], ys)
+	return zs
+}
+
+// ConcatU32 returns a copy of the original slice with the additional boxed slice
+// of values appended.
+func (xs U32) ConcatU32(ys U32) U32 {
+	return xs.Concat([]uint32(ys))
 }
 
 // Contains checks if a value is in the list
@@ -25,6 +34,12 @@ func (xs U32) Contains(v uint32) bool {
 		}
 	}
 	return false
+}
+
+// Elem returns the element with the given index in the list.  Panics if the
+// element does not exist.
+func (xs U32) Elem(n int) uint32 {
+	return xs[n]
 }
 
 // Filter returns a new list of elements matching a predicate
@@ -76,8 +91,19 @@ func (xs U32) Map(f func(uint32) uint32) U32 {
 	return ys
 }
 
+// Reverse returns a copy of the list with the order of elements reversed.
+func (xs U32) Reverse() U32 {
+	ys := make(U32, len(xs))
+	n := len(xs) - 1
+	for i, v := range xs {
+		ys[n-i] = v
+	}
+	return ys
+}
+
 // Swap does an in-place swap of the elements with indexes i and j.  Panics if
-// the elements don't exist.
+// the elements don't exist.  It returns nothing per the Swap signature of
+// Sort.Interface.
 func (xs U32) Swap(i, j int) {
 	xs[i], xs[j] = xs[j], xs[i]
 }

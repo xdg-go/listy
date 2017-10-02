@@ -9,10 +9,19 @@ package listy
 // I8 wraps a slice of int8
 type I8 []int8
 
-// Elem returns the element with the given index in the list.  Panics if the
-// element does not exist.
-func (xs I8) Elem(n int) int8 {
-	return xs[n]
+// Concat returns a copy of the original slice with the additional slice of
+// values appended.
+func (xs I8) Concat(ys []int8) I8 {
+	zs := make(I8, len(xs)+len(ys))
+	copy(zs, xs)
+	copy(zs[len(xs):], ys)
+	return zs
+}
+
+// ConcatI8 returns a copy of the original slice with the additional boxed slice
+// of values appended.
+func (xs I8) ConcatI8(ys I8) I8 {
+	return xs.Concat([]int8(ys))
 }
 
 // Contains checks if a value is in the list
@@ -23,6 +32,12 @@ func (xs I8) Contains(v int8) bool {
 		}
 	}
 	return false
+}
+
+// Elem returns the element with the given index in the list.  Panics if the
+// element does not exist.
+func (xs I8) Elem(n int) int8 {
+	return xs[n]
 }
 
 // Filter returns a new list of elements matching a predicate
@@ -74,8 +89,19 @@ func (xs I8) Map(f func(int8) int8) I8 {
 	return ys
 }
 
+// Reverse returns a copy of the list with the order of elements reversed.
+func (xs I8) Reverse() I8 {
+	ys := make(I8, len(xs))
+	n := len(xs) - 1
+	for i, v := range xs {
+		ys[n-i] = v
+	}
+	return ys
+}
+
 // Swap does an in-place swap of the elements with indexes i and j.  Panics if
-// the elements don't exist.
+// the elements don't exist.  It returns nothing per the Swap signature of
+// Sort.Interface.
 func (xs I8) Swap(i, j int) {
 	xs[i], xs[j] = xs[j], xs[i]
 }

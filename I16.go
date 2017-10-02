@@ -11,10 +11,19 @@ package listy
 // I16 wraps a slice of int16
 type I16 []int16
 
-// Elem returns the element with the given index in the list.  Panics if the
-// element does not exist.
-func (xs I16) Elem(n int) int16 {
-	return xs[n]
+// Concat returns a copy of the original slice with the additional slice of
+// values appended.
+func (xs I16) Concat(ys []int16) I16 {
+	zs := make(I16, len(xs)+len(ys))
+	copy(zs, xs)
+	copy(zs[len(xs):], ys)
+	return zs
+}
+
+// ConcatI16 returns a copy of the original slice with the additional boxed slice
+// of values appended.
+func (xs I16) ConcatI16(ys I16) I16 {
+	return xs.Concat([]int16(ys))
 }
 
 // Contains checks if a value is in the list
@@ -25,6 +34,12 @@ func (xs I16) Contains(v int16) bool {
 		}
 	}
 	return false
+}
+
+// Elem returns the element with the given index in the list.  Panics if the
+// element does not exist.
+func (xs I16) Elem(n int) int16 {
+	return xs[n]
 }
 
 // Filter returns a new list of elements matching a predicate
@@ -76,8 +91,19 @@ func (xs I16) Map(f func(int16) int16) I16 {
 	return ys
 }
 
+// Reverse returns a copy of the list with the order of elements reversed.
+func (xs I16) Reverse() I16 {
+	ys := make(I16, len(xs))
+	n := len(xs) - 1
+	for i, v := range xs {
+		ys[n-i] = v
+	}
+	return ys
+}
+
 // Swap does an in-place swap of the elements with indexes i and j.  Panics if
-// the elements don't exist.
+// the elements don't exist.  It returns nothing per the Swap signature of
+// Sort.Interface.
 func (xs I16) Swap(i, j int) {
 	xs[i], xs[j] = xs[j], xs[i]
 }

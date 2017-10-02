@@ -11,10 +11,19 @@ package listy
 // I32 wraps a slice of int32
 type I32 []int32
 
-// Elem returns the element with the given index in the list.  Panics if the
-// element does not exist.
-func (xs I32) Elem(n int) int32 {
-	return xs[n]
+// Concat returns a copy of the original slice with the additional slice of
+// values appended.
+func (xs I32) Concat(ys []int32) I32 {
+	zs := make(I32, len(xs)+len(ys))
+	copy(zs, xs)
+	copy(zs[len(xs):], ys)
+	return zs
+}
+
+// ConcatI32 returns a copy of the original slice with the additional boxed slice
+// of values appended.
+func (xs I32) ConcatI32(ys I32) I32 {
+	return xs.Concat([]int32(ys))
 }
 
 // Contains checks if a value is in the list
@@ -25,6 +34,12 @@ func (xs I32) Contains(v int32) bool {
 		}
 	}
 	return false
+}
+
+// Elem returns the element with the given index in the list.  Panics if the
+// element does not exist.
+func (xs I32) Elem(n int) int32 {
+	return xs[n]
 }
 
 // Filter returns a new list of elements matching a predicate
@@ -76,8 +91,19 @@ func (xs I32) Map(f func(int32) int32) I32 {
 	return ys
 }
 
+// Reverse returns a copy of the list with the order of elements reversed.
+func (xs I32) Reverse() I32 {
+	ys := make(I32, len(xs))
+	n := len(xs) - 1
+	for i, v := range xs {
+		ys[n-i] = v
+	}
+	return ys
+}
+
 // Swap does an in-place swap of the elements with indexes i and j.  Panics if
-// the elements don't exist.
+// the elements don't exist.  It returns nothing per the Swap signature of
+// Sort.Interface.
 func (xs I32) Swap(i, j int) {
 	xs[i], xs[j] = xs[j], xs[i]
 }

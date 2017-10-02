@@ -11,10 +11,19 @@ package listy
 // U64 wraps a slice of uint64
 type U64 []uint64
 
-// Elem returns the element with the given index in the list.  Panics if the
-// element does not exist.
-func (xs U64) Elem(n int) uint64 {
-	return xs[n]
+// Concat returns a copy of the original slice with the additional slice of
+// values appended.
+func (xs U64) Concat(ys []uint64) U64 {
+	zs := make(U64, len(xs)+len(ys))
+	copy(zs, xs)
+	copy(zs[len(xs):], ys)
+	return zs
+}
+
+// ConcatU64 returns a copy of the original slice with the additional boxed slice
+// of values appended.
+func (xs U64) ConcatU64(ys U64) U64 {
+	return xs.Concat([]uint64(ys))
 }
 
 // Contains checks if a value is in the list
@@ -25,6 +34,12 @@ func (xs U64) Contains(v uint64) bool {
 		}
 	}
 	return false
+}
+
+// Elem returns the element with the given index in the list.  Panics if the
+// element does not exist.
+func (xs U64) Elem(n int) uint64 {
+	return xs[n]
 }
 
 // Filter returns a new list of elements matching a predicate
@@ -76,8 +91,19 @@ func (xs U64) Map(f func(uint64) uint64) U64 {
 	return ys
 }
 
+// Reverse returns a copy of the list with the order of elements reversed.
+func (xs U64) Reverse() U64 {
+	ys := make(U64, len(xs))
+	n := len(xs) - 1
+	for i, v := range xs {
+		ys[n-i] = v
+	}
+	return ys
+}
+
 // Swap does an in-place swap of the elements with indexes i and j.  Panics if
-// the elements don't exist.
+// the elements don't exist.  It returns nothing per the Swap signature of
+// Sort.Interface.
 func (xs U64) Swap(i, j int) {
 	xs[i], xs[j] = xs[j], xs[i]
 }

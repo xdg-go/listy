@@ -11,10 +11,19 @@ package listy
 // I wraps a slice of int
 type I []int
 
-// Elem returns the element with the given index in the list.  Panics if the
-// element does not exist.
-func (xs I) Elem(n int) int {
-	return xs[n]
+// Concat returns a copy of the original slice with the additional slice of
+// values appended.
+func (xs I) Concat(ys []int) I {
+	zs := make(I, len(xs)+len(ys))
+	copy(zs, xs)
+	copy(zs[len(xs):], ys)
+	return zs
+}
+
+// ConcatI returns a copy of the original slice with the additional boxed slice
+// of values appended.
+func (xs I) ConcatI(ys I) I {
+	return xs.Concat([]int(ys))
 }
 
 // Contains checks if a value is in the list
@@ -25,6 +34,12 @@ func (xs I) Contains(v int) bool {
 		}
 	}
 	return false
+}
+
+// Elem returns the element with the given index in the list.  Panics if the
+// element does not exist.
+func (xs I) Elem(n int) int {
+	return xs[n]
 }
 
 // Filter returns a new list of elements matching a predicate
@@ -76,8 +91,19 @@ func (xs I) Map(f func(int) int) I {
 	return ys
 }
 
+// Reverse returns a copy of the list with the order of elements reversed.
+func (xs I) Reverse() I {
+	ys := make(I, len(xs))
+	n := len(xs) - 1
+	for i, v := range xs {
+		ys[n-i] = v
+	}
+	return ys
+}
+
 // Swap does an in-place swap of the elements with indexes i and j.  Panics if
-// the elements don't exist.
+// the elements don't exist.  It returns nothing per the Swap signature of
+// Sort.Interface.
 func (xs I) Swap(i, j int) {
 	xs[i], xs[j] = xs[j], xs[i]
 }

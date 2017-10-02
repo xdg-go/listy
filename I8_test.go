@@ -27,34 +27,45 @@ func TestListI8Box(t *testing.T) {
 
 	var data struct {
 		Box struct {
-			Input  []int8
-			Head   int8
-			Elem3  int8
-			Tail   []int8
-			Init   []int8
-			Last   int8
-			Len    int
-			Less23 bool
-			Less32 bool
-			Swap   []int8
-			Unbox  []int8
+			Concat  []int8
+			Elem3   int8
+			Head    int8
+			Init    []int8
+			Input   []int8
+			Last    int8
+			Len     int
+			Less23  bool
+			Less32  bool
+			Reverse []int8
+			Swap    []int8
+			Tail    []int8
+			Unbox   []int8
 		}
 	}
 	getI8TestData(is, &data)
 
 	xs := listy.I8(data.Box.Input)
 
-	is.Equal(xs.Unbox(), data.Box.Unbox)
-	is.Equal(xs.Head(), data.Box.Head)
-	is.Equal(xs.Elem(3), data.Box.Elem3)
-	is.Equal(xs.Tail().Unbox(), data.Box.Tail)
-	is.Equal(xs.Init().Unbox(), data.Box.Init)
-	is.Equal(xs.Last(), data.Box.Last)
+	// Tests that return ints, bools, etc. irrespective of value type
 	is.Equal(xs.Len(), data.Box.Len)
 	is.Equal(xs.Less(2, 3), data.Box.Less23)
 	is.Equal(xs.Less(3, 2), data.Box.Less32)
 
-	// For Sort.Interface, Swap returns nothing
+	// Tests that return the value type
+	is.Equal(xs.Head(), data.Box.Head)
+	is.Equal(xs.Elem(3), data.Box.Elem3)
+	is.Equal(xs.Last(), data.Box.Last)
+
+	// Tests that return a slice of the value type
+	is.Equal(xs.Unbox(), data.Box.Unbox)
+	is.Equal(xs.Tail().Unbox(), data.Box.Tail)
+	is.Equal(xs.Init().Unbox(), data.Box.Init)
+	is.Equal(xs.Concat(data.Box.Input).Unbox(), data.Box.Concat)
+	is.Equal(xs.ConcatI8(listy.I8(data.Box.Input)).Unbox(), data.Box.Concat)
+	is.Equal(xs.Reverse().Unbox(), data.Box.Reverse)
+
+	// For Sort.Interface, Swap is in place and returns nothing
+	xs = listy.I8(data.Box.Input)
 	xs.Swap(0, 1)
 	is.Equal(xs.Unbox(), data.Box.Swap)
 }

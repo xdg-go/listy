@@ -11,10 +11,19 @@ package listy
 // R wraps a slice of rune
 type R []rune
 
-// Elem returns the element with the given index in the list.  Panics if the
-// element does not exist.
-func (xs R) Elem(n int) rune {
-	return xs[n]
+// Concat returns a copy of the original slice with the additional slice of
+// values appended.
+func (xs R) Concat(ys []rune) R {
+	zs := make(R, len(xs)+len(ys))
+	copy(zs, xs)
+	copy(zs[len(xs):], ys)
+	return zs
+}
+
+// ConcatR returns a copy of the original slice with the additional boxed slice
+// of values appended.
+func (xs R) ConcatR(ys R) R {
+	return xs.Concat([]rune(ys))
 }
 
 // Contains checks if a value is in the list
@@ -25,6 +34,12 @@ func (xs R) Contains(v rune) bool {
 		}
 	}
 	return false
+}
+
+// Elem returns the element with the given index in the list.  Panics if the
+// element does not exist.
+func (xs R) Elem(n int) rune {
+	return xs[n]
 }
 
 // Filter returns a new list of elements matching a predicate
@@ -76,8 +91,19 @@ func (xs R) Map(f func(rune) rune) R {
 	return ys
 }
 
+// Reverse returns a copy of the list with the order of elements reversed.
+func (xs R) Reverse() R {
+	ys := make(R, len(xs))
+	n := len(xs) - 1
+	for i, v := range xs {
+		ys[n-i] = v
+	}
+	return ys
+}
+
 // Swap does an in-place swap of the elements with indexes i and j.  Panics if
-// the elements don't exist.
+// the elements don't exist.  It returns nothing per the Swap signature of
+// Sort.Interface.
 func (xs R) Swap(i, j int) {
 	xs[i], xs[j] = xs[j], xs[i]
 }

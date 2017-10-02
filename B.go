@@ -11,10 +11,19 @@ package listy
 // B wraps a slice of byte
 type B []byte
 
-// Elem returns the element with the given index in the list.  Panics if the
-// element does not exist.
-func (xs B) Elem(n int) byte {
-	return xs[n]
+// Concat returns a copy of the original slice with the additional slice of
+// values appended.
+func (xs B) Concat(ys []byte) B {
+	zs := make(B, len(xs)+len(ys))
+	copy(zs, xs)
+	copy(zs[len(xs):], ys)
+	return zs
+}
+
+// ConcatB returns a copy of the original slice with the additional boxed slice
+// of values appended.
+func (xs B) ConcatB(ys B) B {
+	return xs.Concat([]byte(ys))
 }
 
 // Contains checks if a value is in the list
@@ -25,6 +34,12 @@ func (xs B) Contains(v byte) bool {
 		}
 	}
 	return false
+}
+
+// Elem returns the element with the given index in the list.  Panics if the
+// element does not exist.
+func (xs B) Elem(n int) byte {
+	return xs[n]
 }
 
 // Filter returns a new list of elements matching a predicate
@@ -76,8 +91,19 @@ func (xs B) Map(f func(byte) byte) B {
 	return ys
 }
 
+// Reverse returns a copy of the list with the order of elements reversed.
+func (xs B) Reverse() B {
+	ys := make(B, len(xs))
+	n := len(xs) - 1
+	for i, v := range xs {
+		ys[n-i] = v
+	}
+	return ys
+}
+
 // Swap does an in-place swap of the elements with indexes i and j.  Panics if
-// the elements don't exist.
+// the elements don't exist.  It returns nothing per the Swap signature of
+// Sort.Interface.
 func (xs B) Swap(i, j int) {
 	xs[i], xs[j] = xs[j], xs[i]
 }

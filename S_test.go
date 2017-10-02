@@ -29,34 +29,45 @@ func TestListSBox(t *testing.T) {
 
 	var data struct {
 		Box struct {
-			Input  []string
-			Head   string
-			Elem3  string
-			Tail   []string
-			Init   []string
-			Last   string
-			Len    int
-			Less23 bool
-			Less32 bool
-			Swap   []string
-			Unbox  []string
+			Concat  []string
+			Elem3   string
+			Head    string
+			Init    []string
+			Input   []string
+			Last    string
+			Len     int
+			Less23  bool
+			Less32  bool
+			Reverse []string
+			Swap    []string
+			Tail    []string
+			Unbox   []string
 		}
 	}
 	getSTestData(is, &data)
 
 	xs := listy.S(data.Box.Input)
 
-	is.Equal(xs.Unbox(), data.Box.Unbox)
-	is.Equal(xs.Head(), data.Box.Head)
-	is.Equal(xs.Elem(3), data.Box.Elem3)
-	is.Equal(xs.Tail().Unbox(), data.Box.Tail)
-	is.Equal(xs.Init().Unbox(), data.Box.Init)
-	is.Equal(xs.Last(), data.Box.Last)
+	// Tests that return ints, bools, etc. irrespective of value type
 	is.Equal(xs.Len(), data.Box.Len)
 	is.Equal(xs.Less(2, 3), data.Box.Less23)
 	is.Equal(xs.Less(3, 2), data.Box.Less32)
 
-	// For Sort.Interface, Swap returns nothing
+	// Tests that return the value type
+	is.Equal(xs.Head(), data.Box.Head)
+	is.Equal(xs.Elem(3), data.Box.Elem3)
+	is.Equal(xs.Last(), data.Box.Last)
+
+	// Tests that return a slice of the value type
+	is.Equal(xs.Unbox(), data.Box.Unbox)
+	is.Equal(xs.Tail().Unbox(), data.Box.Tail)
+	is.Equal(xs.Init().Unbox(), data.Box.Init)
+	is.Equal(xs.Concat(data.Box.Input).Unbox(), data.Box.Concat)
+	is.Equal(xs.ConcatS(listy.S(data.Box.Input)).Unbox(), data.Box.Concat)
+	is.Equal(xs.Reverse().Unbox(), data.Box.Reverse)
+
+	// For Sort.Interface, Swap is in place and returns nothing
+	xs = listy.S(data.Box.Input)
 	xs.Swap(0, 1)
 	is.Equal(xs.Unbox(), data.Box.Swap)
 }
