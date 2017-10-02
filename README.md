@@ -5,7 +5,7 @@
 
 ## Synopsis
 
-```
+```go
 import (
 	"fmt"
 
