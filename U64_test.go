@@ -133,3 +133,20 @@ func TestListU64Map(t *testing.T) {
 
 	is.Equal(ys.Unbox(), data.Map.Mapped)
 }
+
+func TestListU64Uniq(t *testing.T) {
+	is := testy.New(t)
+	defer func() { t.Logf(is.Done()) }()
+
+	var data struct {
+		Uniq struct {
+			Cases map[string][2][]uint64
+		}
+	}
+	getU64TestData(is, &data)
+
+	for k, v := range data.Uniq.Cases {
+		is.Label(k).Equal(listy.U64(v[0]).Uniq().Unbox(), v[1])
+	}
+
+}

@@ -120,3 +120,17 @@ func (xs B) Tail() B {
 func (xs B) Unbox() []byte {
 	return []byte(xs)
 }
+
+// Uniq returns a new list with duplicate elements removed.
+func (xs B) Uniq() B {
+	ys := make(B, 0)
+	seen := make(map[byte]struct{})
+	for _, x := range xs {
+		if _, ok := seen[x]; ok {
+			continue
+		}
+		ys = append(ys, x)
+		seen[x] = struct{}{}
+	}
+	return ys
+}

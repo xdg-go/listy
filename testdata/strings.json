@@ -28,5 +28,12 @@
         "input" : [ "c", "a", "d", "a", "e" ],
         "add" : "z",
         "mapped" : [ "cz", "az", "dz", "az", "ez" ]
+    },
+    "uniq" : {
+        "cases" : {
+            "nodups" : [ [ "a", "b", "c", "d", "e" ], [ "a", "b", "c", "d", "e" ] ],
+            "ordered" : [ [ "a", "a", "b", "b", "c" ], [ "a", "b", "c" ] ],
+            "unordered" : [ [ "a", "c", "b", "a", "b" ], [ "a", "c", "b" ] ]
+        }
     }
 }

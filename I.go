@@ -120,3 +120,17 @@ func (xs I) Tail() I {
 func (xs I) Unbox() []int {
 	return []int(xs)
 }
+
+// Uniq returns a new list with duplicate elements removed.
+func (xs I) Uniq() I {
+	ys := make(I, 0)
+	seen := make(map[int]struct{})
+	for _, x := range xs {
+		if _, ok := seen[x]; ok {
+			continue
+		}
+		ys = append(ys, x)
+		seen[x] = struct{}{}
+	}
+	return ys
+}

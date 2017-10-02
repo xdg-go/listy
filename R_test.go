@@ -133,3 +133,20 @@ func TestListRMap(t *testing.T) {
 
 	is.Equal(ys.Unbox(), data.Map.Mapped)
 }
+
+func TestListRUniq(t *testing.T) {
+	is := testy.New(t)
+	defer func() { t.Logf(is.Done()) }()
+
+	var data struct {
+		Uniq struct {
+			Cases map[string][2][]rune
+		}
+	}
+	getRTestData(is, &data)
+
+	for k, v := range data.Uniq.Cases {
+		is.Label(k).Equal(listy.R(v[0]).Uniq().Unbox(), v[1])
+	}
+
+}

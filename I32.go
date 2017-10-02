@@ -120,3 +120,17 @@ func (xs I32) Tail() I32 {
 func (xs I32) Unbox() []int32 {
 	return []int32(xs)
 }
+
+// Uniq returns a new list with duplicate elements removed.
+func (xs I32) Uniq() I32 {
+	ys := make(I32, 0)
+	seen := make(map[int32]struct{})
+	for _, x := range xs {
+		if _, ok := seen[x]; ok {
+			continue
+		}
+		ys = append(ys, x)
+		seen[x] = struct{}{}
+	}
+	return ys
+}

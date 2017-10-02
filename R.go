@@ -120,3 +120,17 @@ func (xs R) Tail() R {
 func (xs R) Unbox() []rune {
 	return []rune(xs)
 }
+
+// Uniq returns a new list with duplicate elements removed.
+func (xs R) Uniq() R {
+	ys := make(R, 0)
+	seen := make(map[rune]struct{})
+	for _, x := range xs {
+		if _, ok := seen[x]; ok {
+			continue
+		}
+		ys = append(ys, x)
+		seen[x] = struct{}{}
+	}
+	return ys
+}

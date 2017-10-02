@@ -133,3 +133,20 @@ func TestListSMap(t *testing.T) {
 
 	is.Equal(ys.Unbox(), data.Map.Mapped)
 }
+
+func TestListSUniq(t *testing.T) {
+	is := testy.New(t)
+	defer func() { t.Logf(is.Done()) }()
+
+	var data struct {
+		Uniq struct {
+			Cases map[string][2][]string
+		}
+	}
+	getSTestData(is, &data)
+
+	for k, v := range data.Uniq.Cases {
+		is.Label(k).Equal(listy.S(v[0]).Uniq().Unbox(), v[1])
+	}
+
+}

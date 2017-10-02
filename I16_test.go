@@ -133,3 +133,20 @@ func TestListI16Map(t *testing.T) {
 
 	is.Equal(ys.Unbox(), data.Map.Mapped)
 }
+
+func TestListI16Uniq(t *testing.T) {
+	is := testy.New(t)
+	defer func() { t.Logf(is.Done()) }()
+
+	var data struct {
+		Uniq struct {
+			Cases map[string][2][]int16
+		}
+	}
+	getI16TestData(is, &data)
+
+	for k, v := range data.Uniq.Cases {
+		is.Label(k).Equal(listy.I16(v[0]).Uniq().Unbox(), v[1])
+	}
+
+}

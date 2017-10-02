@@ -120,3 +120,17 @@ func (xs I64) Tail() I64 {
 func (xs I64) Unbox() []int64 {
 	return []int64(xs)
 }
+
+// Uniq returns a new list with duplicate elements removed.
+func (xs I64) Uniq() I64 {
+	ys := make(I64, 0)
+	seen := make(map[int64]struct{})
+	for _, x := range xs {
+		if _, ok := seen[x]; ok {
+			continue
+		}
+		ys = append(ys, x)
+		seen[x] = struct{}{}
+	}
+	return ys
+}
