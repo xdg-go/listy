@@ -15,7 +15,7 @@ import (
 )
 
 var testdata map[string][]byte
-var testfiles = []string{"ints.json", "strings.json"}
+var testfiles = []string{"ints.json", "strings.json", "base64.json"}
 
 func TestMain(m *testing.M) {
 	testdata = make(map[string][]byte)

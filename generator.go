@@ -26,7 +26,10 @@ type generated struct {
 	TestFile string
 }
 
-// Key is listy type; value is native type
+// Key is listy type; value is native type.  Note: "I8" is the base template
+// and "BS" is hand-generated as operators like "==" and ">" don't work on
+// [][]byte.
+
 var newTypes = []generated{
 	{TypeName: "I", BaseType: "int", TestFile: "ints.json"},
 	{TypeName: "U", BaseType: "uint", TestFile: "ints.json"},

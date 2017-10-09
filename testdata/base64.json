@@ -1,0 +1,39 @@
+{
+    "box" : {
+        "concat": [ "YQ==", "Yg==", "Yw==", "ZA==", "ZQ==", "YQ==", "Yg==", "Yw==", "ZA==", "ZQ==" ],
+        "elem3" : "ZA==",
+        "head"  : "YQ==",
+        "init"  : [ "YQ==", "Yg==", "Yw==", "ZA==" ],
+        "input" : [ "YQ==", "Yg==", "Yw==", "ZA==", "ZQ==" ],
+        "last"  : "ZQ==",
+        "len"   : 5,
+        "less23": true,
+        "less32": false,
+        "reverse": [ "ZQ==", "ZA==", "Yw==", "Yg==", "YQ==" ],
+        "swap"  : [ "Yg==", "YQ==", "Yw==", "ZA==", "ZQ==" ],
+        "tail"  : [ "Yg==", "Yw==", "ZA==", "ZQ==" ],
+        "unbox" : [ "YQ==", "Yg==", "Yw==", "ZA==", "ZQ==" ]
+    },
+    "contains" : {
+        "input" : [ "YQ==", "Yg==", "Yw==", "ZA==", "ZQ==" ],
+        "containsTrue" : [ "Yg==", "ZQ==" ],
+        "containsFalse" : [ "eA==", "eg==" ]
+    },
+    "filter" : {
+        "input" : [ "Yw==", "YQ==", "ZA==", "YQ==", "ZQ==" ],
+        "lessthan" : "Yg==",
+        "filtered" : [ "YQ==", "YQ==" ]
+    },
+    "map" : {
+        "input" : [ "Yw==", "YQ==", "ZA==", "YQ==", "ZQ==" ],
+        "add" : "eg==",
+        "mapped" : [ "Y3o=", "YXo=", "ZHo=", "YXo=", "ZXo=" ]
+    },
+    "uniq" : {
+        "cases" : {
+            "nodups" : [ [ "YQ==", "Yg==", "Yw==", "ZA==", "ZQ==" ], [ "YQ==", "Yg==", "Yw==", "ZA==", "ZQ==" ] ],
+            "ordered" : [ [ "YQ==", "YQ==", "Yg==", "Yg==", "Yw==" ], [ "YQ==", "Yg==", "Yw==" ] ],
+            "unordered" : [ [ "YQ==", "Yw==", "Yg==", "YQ==", "Yg==" ], [ "YQ==", "Yw==", "Yg==" ] ]
+        }
+    }
+}
