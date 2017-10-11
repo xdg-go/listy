@@ -1,6 +1,6 @@
 GENERATED=$(shell grep -l "DO NOT EDIT" *.go | grep -v generator)
 
-all: source test vet lint
+all: source cover vet lint
 
 source: *.go
 

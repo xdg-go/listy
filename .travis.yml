@@ -5,6 +5,7 @@ go:
   - 1.8
   - 1.9
   - master
+install: go get -t ./...
 matrix:
   allow_failures:
     - go: master
